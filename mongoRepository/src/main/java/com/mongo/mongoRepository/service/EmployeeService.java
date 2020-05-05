@@ -48,10 +48,28 @@ public class EmployeeService {
     return  response;
   }
 
+  // 1. Example Executor (Searching)
   public List<Employee> getAllByExample(Employee emp) {
-    ExampleMatcher matcher = ExampleMatcher.matchingAny().withIgnoreCase();
-    Example<Employee> example = Example.of(emp, matcher);
+    // Find(Searching) conditions
+    // ExampleMatcher matcher = ExampleMatcher.matchingAny().withIgnoreCase().withMatcher("firstName", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING));
+    Example<Employee> example = Example.of(emp);
 
     return employeeRepository.findAll(example);
+  }
+
+  // 2.1 QueryByMethodNames
+  public List<Employee> getAllByFirstName(String firstName) {
+    return employeeRepository.findByFirstName(firstName);
+  }
+
+  // 2.2 QueryByMethodNames Nested Object
+  public List<Employee> getAllByZipCode(Integer zipCode) {
+    return employeeRepository.findByAddressZipCode(zipCode);
+  }
+
+  // 3 Query Baed on JSON
+  // Name Of function doesnot mater
+  public List<Employee> getAllBySalaryGreaterThan(Integer salary) {
+    return employeeRepository.abc(salary);
   }
 }

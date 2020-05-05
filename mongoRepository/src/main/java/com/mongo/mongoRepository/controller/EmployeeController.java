@@ -45,10 +45,29 @@ public class EmployeeController {
     return employeeService.getAllEmployeeInPage(pageNos,pageSize,sortBy);
   }
 
-  // Example Executor (Searching)
+  // 1. Example Executor (Searching)
   @GetMapping("/example")
   public List<Employee> getAllByExample(@RequestBody Employee emp) {
     return employeeService.getAllByExample(emp);
   }
 
+
+  // 2.1 QueryByMethodNames
+  @GetMapping("/firstName")
+  public List<Employee> getAllByFirstName(@RequestParam(name = "firstName") String firstName) {
+    return employeeService.getAllByFirstName(firstName);
+  }
+
+  // 2.2 QueryByMethodNames Nested Object
+  @GetMapping("/zipCode")
+  public List<Employee> getAllByZipCode(@RequestParam(name = "zipCode") Integer zipCode) {
+    return employeeService.getAllByZipCode(zipCode);
+  }
+
+
+  // 3 Query Baed on JSON
+  @GetMapping("/salary")
+  public List<Employee> getAllBySalaryGreaterThan(@RequestParam(name = "salary") Integer salary) {
+    return employeeService.getAllBySalaryGreaterThan(salary);
+  }
 }
